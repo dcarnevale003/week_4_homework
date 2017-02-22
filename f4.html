@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fantastic Four Vs. Doctor Doom</title>
+
+  <!-- Bootstrap File -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+ 
+  <link rel="stylesheet" type="text/css" href="f4.css">
+
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Jumbotron with Title -->
+    <div class="jumbotron">
+      <h1 class="text-center"><strong>Fantastic Four Vs. Doctor Doom</strong></h1>
+      
+      
+
+    </div>
+    <div class="row">
+
+      <div class="col-lg-6">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Rules of the Game</h3>
+          </div>
+          <div class="panel-body">
+              <p>You will be given a random number at the start of the game.</p>
+              <p>There are the four members of the Fantastic Four below. By clicking on one of the Fantastic Four youl will add a specific amount of points to your total score.</p>
+              <p>If you match your total score to the random number Doctor Doom meets his demise, but if your total score goes over the random number Doctor Doom will emerge as victorious.</p>
+              <p>The value of each Fantastic Four member is hidden from you until you click on them.</p>
+              <p>Each time the game starts the game will change the value of each Fantastic Four member.</p>
+              <p>The fate of the Fantastic Four lies in your hands!</p>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Number needed to defeat Dr. Doom: <span class="myNumber"></span></h3>
+          </div>
+          
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><span>Your total: <span class="yourTotal"></span></span></h3>
+          </div>
+          <div class="panel-body">
+            <div class="text-center">
+              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/Thing_v2_1_coverart.jpg/250px-Thing_v2_1_coverart.jpg" style=" width:120px;  height: 120px" class="f4" id="thing">
+              
+              <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/Invisible_Woman.png" style=" width:120px;  height: 120px" class="f4" id="invisible">
+
+              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Reedr.jpg/250px-Reedr.jpg" style=" width:120px;  height: 120px" class="f4" id="stretch">
+
+              <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Human_Torch_%28Johnny_Storm%29.png" style=" width:120px;  height: 120px" class="f4" id="torch">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Stats</h3>
+          </div>
+          <div class="panel-body">
+            <div class="text-center">
+              <h3>Wins: <span class="wins"></span></h3>
+              <h3>Losses: <span class="losses"></span></h3>
+            </div>
+            <hr>
+            <div class="text-center">
+              <input type="button" value="Play Again!" onClick="window.location.reload()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+
+        <img src="http://cdn1.sciencefiction.com/wp-content/uploads/2015/07/DrDoom_FantasticFour.jpg" style="width: 550px; height: 350px">
+        <div id="image-div"></div>
+        <div id="image-div"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript function that wraps everything
+    var fantasticFour = ["invisible", "stretch", "thing", "torch"];
+
+var wins = 0;
+var losses = 0;
+var counter = 0;
+var total = 0;
+var lockGame = false;
+
+
+var myNumber = Math.floor(Math.random() * 101) + 19;
+$(".myNumber").html(myNumber);
+
+var oneNumber = Math.floor(Math.random() * 12) + 1;
+var twoNumber = Math.floor(Math.random() * 12) + 1;
+var threeNumber = Math.floor(Math.random() * 12) + 1;
+var fourNumber = Math.floor(Math.random() * 12) + 1;
+
+
+$(document).ready(function() {
+
+            $("#thing").on("click", function() {
+                total = total + oneNumber;
+                $(".yourTotal").html(total);
+                winning();
+                
+
+            });
+
+            $("#invisible").on("click", function() {
+                total = total + twoNumber;
+                $(".yourTotal").html(total);
+                winning();
+                
+
+            });
+
+            $("#torch").on("click", function() {
+                total = total + threeNumber;
+                $(".yourTotal").html(total);
+                winning();
+                
+
+            });
+
+            $("#stretch").on("click", function() {
+                total = total + fourNumber;
+                $(".yourTotal").html(total);
+                winning();
+
+            });
+
+            function winning() {
+              if (total == myNumber){
+                wins++;
+                $(".wins").html(wins);
+                alert("You win! Click 'Play Again' to take on Dr. Doom.");
+                $("#image-div").html("<img id='won' src='http://armsandinfluence.typepad.com/photos/uncategorized/doom21_1.GIF'/>");
+
+
+              } else if(total > myNumber){
+                losses++;
+                $(".losses").html(losses);
+                alert("You lost! Click 'Play Again' to take on Dr. Doom.");
+
+                $("#image-div").html("<img id='won' src='http://bigcomicpage.files.wordpress.com/2013/11/anmnfanfour001cover_400col.jpg'/>");
+              }
+            }
+
+            function reset () {}
+            randomNumber = Math.floor(Math.random() * 101) + 19;
+            
+              });
+  </script>
+
+</body>
